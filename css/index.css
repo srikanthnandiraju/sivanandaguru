@@ -263,3 +263,9 @@ ion-icon.bigger-icon {
 .md {
     --f7-preloader-size: 22px;
 }
+
+
+audio::-webkit-media-controls-panel,
+video::-webkit-media-controls-panel {
+    background-color: #336699;
+}
