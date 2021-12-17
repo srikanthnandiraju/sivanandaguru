@@ -1,0 +1,287 @@
+<template>
+    <div class="page" data-name="my_celebs">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner sliding">
+
+                <div class="navbar-inner sliding">
+                    <div class="left">
+                        &nbsp;
+                        <a href="#" class="link back">
+                            <i class="icon icon-back"></i>
+                        </a>
+                    </div>
+                    <div class="title">Star Socials</div>
+                    <!-- <div class="right" id="create-celebs-button">
+                        <ion-icon name="create-outline" class="bigger-icon"></ion-icon>
+                        &nbsp;
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="fab fab-right-bottom">
+            <a href="#" id="create-celebs-button">
+                <ion-icon name="add-outline" class="bigger-icon" style="color:white;">
+                </ion-icon>
+            </a>
+        </div>
+        <div class="page-content">
+
+            <div class="popup my-celebs-popup">
+                <div class="page">
+                    <div class="page-content display-flex flex-direction-column justify-content-center">
+                        <!-- <div class="page-content"> -->
+
+                        <form class="list form-list inset" id="celebs-form">
+                            <div class="text-align-center">
+                                <ion-icon name="star-outline"
+                                    style="font-size: 50px; --ionicon-stroke-width: 10px;color:#2196f3;">
+                                </ion-icon>
+                                <br>
+                                <br>
+                            </div>
+
+                            <input type="hidden" name="id">
+                            <ul style="padding-bottom: 10px;">
+
+                                <li class="item-content item-input item-input-outline">
+                                    <div class="item-inner">
+                                        <div class="item-title item-floating-label">Name</div>
+                                        <div class="item-input-wrap">
+                                            <input type="text" name="name" placeholder="Celebrity name">
+                                            <span class="input-clear-button"></span>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <div class="row no-gap">
+                                    <div class="col">
+                                        <li class="item-content item-input item-input-outline">
+                                            <div class="item-inner">
+                                                <div class="item-title item-floating-label">Twitter</div>
+                                                <div class="item-input-wrap">
+                                                    <input type="text" name="twitter" placeholder="user name">
+                                                    <span class="input-clear-button"></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <div class="col">
+                                        <li class="item-content item-input item-input-outline">
+                                            <div class="item-inner">
+                                                <div class="item-title item-floating-label">Instagram</div>
+                                                <div class="item-input-wrap">
+                                                    <input type="text" name="insta" placeholder="user name">
+                                                    <span class="input-clear-button"></span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </div>
+                                </div>
+
+                                <li class="item-content item-input item-input-outline">
+                                    <div class="item-inner">
+                                        <div class="item-title item-floating-label">News</div>
+                                        <div class="item-input-wrap">
+                                            <input type="text" name="news" placeholder="Search term">
+                                            <span class="input-clear-button"></span>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="item-content item-input item-input-outline">
+                                    <div class="item-inner">
+                                        <div class="item-title item-floating-label">Youtube</div>
+                                        <div class="item-input-wrap">
+                                            <input type="text" name="youtube" placeholder="Sarch term">
+                                            <span class="input-clear-button"></span>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </form>
+
+                        <div class="block">
+                            <div class="row" style="width:200px;margin:auto;">
+                                <button class="button col save-celebs-button button-fill color-blue"
+                                    style="border-radius: 20px;">Save</button>
+                                <button class="button col popup-close button-fill color-gray"
+                                    style="border-radius: 20px;">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="block">
+                {{#each my_celebs}}
+                <div class="card" style="margin-bottom:20px;">
+                    <div class="card-header">{{name}}</div>
+                    <div class="card-content card-content-padding">
+                        <p class="padding">{{twitter}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="display-flex" @click="editNote('{{id}}')">
+                            <ion-icon name="create-outline" class="card-icon save-item-button" style="color:orangered">
+                            </ion-icon>
+                        </div>
+
+                        <div class="display-flex">
+                            <ion-icon name="time-outline" class="card-icon"></ion-icon>
+                            &nbsp;{{js "moment(this.created_at).fromNow()"}}.
+                        </div>
+
+                        <div class="display-flex" @click="deleteMyNote('{{id}}')">
+                            <ion-icon name="trash-outline" class="card-icon save-item-button" style="color:red">
+                            </ion-icon>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+
+            {{#js_if "this.my_celebs.length<1"}}
+            <div class="flexy" style="height:70vh;">
+                <div class="text-align-center">
+                    <ion-icon name="star-outline" class="bigger-one"
+                        style="font-size: 150px; --ionicon-stroke-width: 10px;color:#2196f3;">
+                    </ion-icon>
+                    <h3 class="align-self-center">No stars added.<br> Press on the "+" button to add stars
+                    </h3>
+                </div>
+            </div>
+            {{/js_if}}
+
+        </div>
+    </div>
+</template>
+
+<script>
+    return {
+        data: function () {
+            return {
+                my_celebs: []
+            }
+        },
+        mounted() {
+
+            var self = this;
+            var my_celebs = DataStore.get("my_celebs");
+
+            self.$setState({
+                my_celebs: my_celebs
+            });
+
+            var popup = app.popup.create({
+                el: ".my-celebs-popup"
+            });
+
+            $$("#create-celebs-button").on("click", function (e) {
+                if (popup.opened) {
+                    popup.close();
+                }
+                // Reset form.
+                //app.form.fillFromData('#celebs-form', );
+                //popup.open();
+                var star = {
+                    id: "",
+                    name: "",
+                    twitter: "",
+                    insta: "",
+                    youtube: "",
+                    news: ""
+                };
+                app.emit("show-celebs-popup", {
+                    star
+                });
+            });
+
+
+            app.off('show-celebs-popup').on('show-celebs-popup', function (data) {
+                if (data && data.star) {
+                    app.form.fillFromData('#celebs-form', data.star);
+                }
+                popup.open();
+            });
+
+            app.off('render-my-celebs').on("render-my-celebs", function (el) {
+                my_celebs = DataStore.get("my_celebs");
+                self.$setState({
+                    my_celebs: my_celebs
+                });
+                popup.close();
+            });
+
+            $$(".row").on('click', '.save-celebs-button', function () {
+                //$$(".save-celebs-button").on("click", function (e) {
+                var one_star = app.form.convertToData('#celebs-form');
+
+                if (!one_star.name) {
+                    self.$app.dialog.alert('Please enter a name for your celebs');
+                    return;
+                }
+
+                // Update celebs logic. Remove existing and add again with same id.
+                my_celebs = DataStore.get("my_celebs");
+                if (one_star.id) { // existing note
+                    my_celebs = _.reject(my_celebs, function (o) {
+                        return o.id == one_star.id;
+                    });
+                    one_star.updated_at = moment();
+                } else {
+                    one_star.id = DataStore.uuid();
+                    one_star.created_at = moment();
+                }
+
+                my_celebs.push(one_star);
+                DataStore.set("my_celebs", my_celebs);
+                app.emit("render-my-celebs");
+                app.emit('render-celebs-in-landing');
+
+            });
+
+            // Handle case when celebs is launced with title from other screens.
+            var note_title = this.$route.params.note_title;
+            if (note_title) {
+                var note = {
+                    id: "",
+                    name: note_title,
+                    description: ""
+                };
+                app.emit("show-celebs-popup", {
+                    note
+                });
+            }
+        },
+        methods: {
+            editNote: function (id) {
+                var self = this;
+                var my_celebs = DataStore.get("my_celebs");
+                var found_note = _.find(my_celebs, {
+                    id: id
+                });
+                app.form.fillFromData('#celebs-form', found_note);
+                app.emit("show-celebs-popup");
+            },
+            deleteMyNote: function (id) {
+                var self = this;
+                var my_celebs = DataStore.get("my_celebs");
+                my_celebs = _.reject(my_celebs, function (o) {
+                    return o.id == id;
+                });
+
+                self.$setState({
+                    my_celebs: my_celebs,
+                });
+                DataStore.set("my_celebs", my_celebs);
+                showToast("Removed successfully", "center");
+                app.emit('render-celebs-in-landing');
+            }
+        },
+
+
+    }
+</script>

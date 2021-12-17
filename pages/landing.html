@@ -1,0 +1,77 @@
+<template>
+    <div class="page" data-name="landing">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a class="link panel-open">
+                        <ion-icon name="menu-outline" class="white-icon" size="large">
+                        </ion-icon>
+                    </a>
+                </div>
+                <div class="title">Mantra</div>
+                <div class="right">
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content">
+
+            <div style="border:1px solid black">
+                <br>
+                <div class="row">
+                    <div class="col-75">
+                        <h3 style="margin:0px;padding-left:10px;">Sivananda Mantra</h3>
+                    </div>
+                    <div class="col-25 text-align-right">
+                        <div class="preloader color-blue"></div>&nbsp;&nbsp;
+                    </div>
+                </div>
+                {{#each talks}}
+                <div class="card">
+                    <div class="card-content card-content-padding">{{English}}</div>
+                </div>
+                <div class="card">
+                    <div class="card-content card-content-padding">{{Telugu}}</div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    return {
+        data: function () {
+            return {
+                talks: [],
+            }
+        },
+        mounted() {
+            $$(".preloader").hide();
+            var self = this;
+
+            var public_spreadsheet_url =
+                'https://docs.google.com/spreadsheets/d/e/2PACX-1vQaM0od4xDjjAXi8ox0jL7DyTsDGL-SbCeB6Llt6kkSr31e1OXUr-lHxchJbd9G1JrYgaKirHLwtFdw/pub?output=csv';
+
+            Papa.parse(public_spreadsheet_url, {
+                download: true,
+                header: true,
+                complete: self.showInfo
+            });
+
+        },
+        methods: {
+
+            showInfo: function (results) {
+                var self = this;
+                var data = results.data;
+                console.log(data);
+                self.$setState({
+                    talks: data
+                });
+            },
+
+        }
+    }
+</script>

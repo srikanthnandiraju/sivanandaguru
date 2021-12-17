@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#2196f3">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/framework7/5.6.0/js/framework7.bundle.min.js"></script>
+    <title>[ Sadhguru Sivananda ]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/5.6.0/css/framework7.bundle.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div id="app" class="theme-dark">
+        <div class="panel panel-left panel-push panel-resizable">
+            <div class="page" style="background:#222;">
+                <br>
+                <div class="display-flex justify-content-center">
+                    <div class="padding">
+                        <br>
+                        <img src="img/guru.jpeg" width="150" alt="" class="svg-icon">
+                    </div>
+                </div>
+                <div class="list inset">
+                    <ul style="background:#222;">
+                        <li>
+                            <div class="item-content link panel-close" onclick="loadScreen('/star_form/')">
+                                <div class="item-inner">
+                                    <div class="item-title">Star List</div>
+                                    <div class="item-after">
+                                        <ion-icon name="star-outline" class="bigger-icon" style="color:#2196f3;">
+                                        </ion-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content link panel-close" onclick="shareApp()">
+                                <div class="item-inner">
+                                    <div class="item-title">Share App</div>
+                                    <div class="item-after">
+                                        <ion-icon name="share-outline" class="bigger-icon"></ion-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="view view-main">
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js">
+    </script>
+
+</body>
+
+</html>

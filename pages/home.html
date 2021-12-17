@@ -1,0 +1,149 @@
+<template>
+    <div class="page" data-name="home">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a class="link panel-open">
+                        <ion-icon name="menu-outline" class="white-icon" size="large">
+                        </ion-icon>
+                    </a>
+                </div>
+                <div class="title">Temples</div>
+                <div class="right">
+
+                </div>
+
+                <div class="subnavbar">
+                    <div class="subnavbar-inner">
+                        <form class="list" id="login-form" style="width:100%;margin:auto;">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-input-wrap">
+                                            <input id="autocomplete_search" name="autocomplete_search" type="text"
+                                                class="form-control" placeholder="Search" style="text-align:center">
+                                            <span class="input-clear-button"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- <div class="toolbar toolbar-bottom no-shadow">
+            <div class="toolbar-inner">
+                <span></span>
+                <ion-icon name="albums-outline" id="more" class="bigger-icon"
+                    style="font-size: 40px; --ionicon-stroke-width: 16px;color:#2196f3;cursor: pointer;"></ion-icon>
+                <span></span>
+            </div>
+        </div> -->
+
+
+        <div class="page-content">
+
+            <div class="block">
+                <div class="row justify-content-center align-content-center">
+                    {{#each places}}
+                    <div class="col-100 medium-50 large-33 xlarge-25"
+                        onclick="loadScreen('/place-detail/{{place_id}}')">
+                        <div class="margin place-card">
+                            {{#if photos}}
+                            {{#photos}}
+                            <div class="image-holder"
+                                style="background:url('{{ this.getUrl() }}') no-repeat center center; background-size:cover;">
+                                &nbsp;</div>
+                            {{/photos}}
+                            {{else}}
+                            <div class="image-holder" style="background:url('https://images.unsplash.com/photo-1514377863868-02d7217c8bcd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2700&q=80')
+                                no-repeat center center; background-size:cover;">
+                                &nbsp;</div>
+                            {{/if}}
+
+                            <div class="text-holder-div">
+                                <h3 class="text-align-center">{{name}}</h3>
+                                <p class="text-align-center">{{vicinity}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{else}}
+                    <div class="col-100 medium-50 large-33 xlarge-25">
+                        <div class="margin flexy" style="height:60vh;">
+                            <div class="text-align-center">
+                                <ion-icon name="search-outline" class="bigger-one"
+                                    style="font-size: 100px; --ionicon-stroke-width: 10px;color:#2196f3;">
+                                </ion-icon>
+                                <h3 class="align-self-center">No Results</h3>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</template>
+
+<script>
+    return {
+        data: function () {
+            return {
+                places: []
+            }
+        },
+        mounted() {
+            var self = this;
+            google.maps.event.addDomListener(window, 'load', initialize);
+            var pacContainerInitialized = false;
+
+            function initialize() {
+                $$("#autocomplete_search").keypress(function () {
+                    if (!pacContainerInitialized) {
+                        $$(".pac-container").css("z-index", "9999");
+                        pacContainerInitialized = true;
+                    }
+                });
+                var input = document.getElementById('autocomplete_search');
+                autocomplete = new google.maps.places.Autocomplete(input);
+                autocomplete.addListener('place_changed', function () {
+                    var place = autocomplete.getPlace();
+                    searchLat = place.geometry.location.lat();
+                    searchLon = place.geometry.location.lng();
+                    searchLocationText = $$("#autocomplete_search").val();
+                    //console.log(searchLat + "," + searchLon);
+                    searchResults = [];
+                    paginator = undefined;
+                    searchAtLocation();
+                });
+            }
+
+            $$("#searchbutton").on('click', function () {
+                searchResults = [];
+                paginator = undefined;
+                searchAtLocation();
+            });
+
+            $$("#more").click(function () {
+                paginator.nextPage();
+            });
+
+            app.off("search_results").on("search_results", function (search_data) {
+                //console.log(search_data);
+                self.$setState({
+                    places: search_data
+                });
+            })
+
+            activeCardTouch();
+
+        }
+    }
+</script>
