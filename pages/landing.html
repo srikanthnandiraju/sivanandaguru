@@ -64,13 +64,13 @@
             Papa.parse(public_spreadsheet_url, {
                 download: true,
                 header: true,
-                complete: self.showInfo
+                complete: self.showMantra
             });
 
         },
         methods: {
 
-            showInfo: function (results) {
+            showMantra: function (results) {
                 var self = this;
                 var data = results.data;
                 console.log(data);

@@ -9,7 +9,7 @@
         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <!-- <meta name="theme-color" content="#2196f3"> -->
+    <meta name="theme-color" content="#222">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
@@ -27,30 +27,35 @@
             <div class="page" style="background:#222;">
                 <br>
                 <div class="display-flex justify-content-center">
-                    <div class="padding">
+                    <div class="padding " style="text-align: center">
                         <br>
                         <img src="img/guru.jpeg" width="150" alt="" class="svg-icon">
+                        <br>
+                        Sadhguru Sivananda Guruji
                     </div>
+
                 </div>
+
                 <div class="list inset">
                     <ul style="background:#222;">
                         <li>
-                            <div class="item-content link panel-close" onclick="loadScreen('/star_form/')">
+                            <!-- <div class="item-content link panel-close" onclick="shareApp()"> -->
+                            <div class="item-content link panel-close" onclick="loadScreen('/mantra/')">
                                 <div class="item-inner">
-                                    <div class="item-title">Star List</div>
+                                    <div class="item-title">Mantra</div>
                                     <div class="item-after">
-                                        <ion-icon name="star-outline" class="bigger-icon" style="color:#2196f3;">
-                                        </ion-icon>
+                                        <ion-icon name="heart-outline" class="bigger-icon"></ion-icon>
                                     </div>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <div class="item-content link panel-close" onclick="shareApp()">
+                            <div class="item-content link panel-close" onclick="loadScreen('/namavali/')">
                                 <div class="item-inner">
-                                    <div class="item-title">Share App</div>
+                                    <div class="item-title">Namavali</div>
                                     <div class="item-after">
-                                        <ion-icon name="share-outline" class="bigger-icon"></ion-icon>
+                                        <ion-icon name="star-outline" class="bigger-icon" style="color:#2196f3;">
+                                        </ion-icon>
                                     </div>
                                 </div>
                             </div>

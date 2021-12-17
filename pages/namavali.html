@@ -1,5 +1,5 @@
 <template>
-    <div class="page" data-name="landing">
+    <div class="page" data-name="namavali">
         <div class="navbar">
             <div class="navbar-bg"></div>
             <div class="navbar-inner sliding">
@@ -9,7 +9,7 @@
                         </ion-icon>
                     </a>
                 </div>
-                <div class="title">Mantra</div>
+                <div class="title">Namavali</div>
                 <div class="right">
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <br>
                 <div class="row">
                     <div class="col-75">
-                        <h3 style="margin:0px;padding-left:10px;">Sivananda Mantra</h3>
+                        <h3 style="margin:0px;padding-left:10px;">Sivananda 108 Namavali</h3>
                     </div>
                     <div class="col-25 text-align-right">
                         <div class="preloader color-blue"></div>&nbsp;&nbsp;
@@ -29,10 +29,14 @@
                 </div>
                 {{#each talks}}
                 <div class="card">
-                    <div class="card-content card-content-padding">{{English}}</div>
-                </div>
-                <div class="card">
-                    <div class="card-content card-content-padding">{{Telugu}}</div>
+                    <div class="card-content card-content-padding">
+                        <p style="font-size: 1.2em;">
+                            {{Telugu}}
+                            <br>
+                            {{English}}
+                        </p>
+                    </div>
+                    <!-- <div class="card-content card-content-padding"></div> -->
                 </div>
                 {{/each}}
             </div>
@@ -52,18 +56,18 @@
             var self = this;
 
             var public_spreadsheet_url =
-                'https://docs.google.com/spreadsheets/d/e/2PACX-1vQaM0od4xDjjAXi8ox0jL7DyTsDGL-SbCeB6Llt6kkSr31e1OXUr-lHxchJbd9G1JrYgaKirHLwtFdw/pub?output=csv';
+                'https://docs.google.com/spreadsheets/d/e/2PACX-1vRcDg_3ObI30ukiaa4blwBVmGl5Y4zwD5Wp_Htmxd3h_uouRfVjkgLAMtp2CWYolejMMl-YJARddTAM/pub?output=csv';
 
             Papa.parse(public_spreadsheet_url, {
                 download: true,
                 header: true,
-                complete: self.showInfo
+                complete: self.showNamavali
             });
 
         },
         methods: {
 
-            showInfo: function (results) {
+            showNamavali: function (results) {
                 var self = this;
                 var data = results.data;
                 console.log(data);

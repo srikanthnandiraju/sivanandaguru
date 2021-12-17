@@ -25,16 +25,16 @@ var app = new Framework7({
             transition: 'f7-push',
         }
     }, {
-        path: '/star_form/',
-        componentUrl: './pages/star_form.html',
-        name: 'place-detail',
+        path: '/namavali/',
+        componentUrl: './pages/namavali.html',
+        name: 'namavali',
         options: {
             transition: 'f7-push',
         }
     }, {
-        path: '/pooja-types/',
-        componentUrl: './pages/pooja_types.html',
-        name: 'pooja-types',
+        path: '/mantra/',
+        componentUrl: './pages/landing.html',
+        name: 'mantra',
         options: {
             transition: 'f7-push',
         }
