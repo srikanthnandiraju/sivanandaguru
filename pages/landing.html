@@ -19,19 +19,23 @@
 
             <div style="border:1px solid black">
                 <br>
-                <div class="row">
+
+                <!-- <div class="row">
                     <div class="col-75">
                         <h3 style="margin:0px;padding-left:10px;">Sivananda Mantra</h3>
                     </div>
                     <div class="col-25 text-align-right">
                         <div class="preloader color-blue"></div>&nbsp;&nbsp;
                     </div>
-                </div>
+                </div> -->
+
                 {{#each talks}}
+
+                {{#js_if "this.heading == 'yes'"}}
+                <h3 style="margin:0px;padding-left:10px;">{{English}}</h3>
+                {{else}}
                 <div class="card">
                     <div class="card-content card-content-padding">{{English}}</div>
-
-
                 </div>
                 <div class="card">
                     <div class="card-content card-content-padding">{{Telugu}}</div>
@@ -41,6 +45,8 @@
                         <code> Sadhguru Sivananda Guruji</code>
                     </audio>
                 </div>
+                {{/js_if}}
+
                 {{/each}}
             </div>
         </div>
